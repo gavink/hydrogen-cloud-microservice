@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry  location="G:\Repository\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar"/>
+	<context id="context1">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection connectionURL="jdbc:mysql://192.168.99.200/hycloud" driverClass="com.mysql.jdbc.Driver"
+			password="123456" userId="root" />
+		<javaModelGenerator targetPackage="com.hycloud.auth.sso.storage.entity"
+			targetProject="F:\Projects\java\IdeaProjects\hycloud\hycloud-auth\sso\src\main\java" />
+		<sqlMapGenerator targetPackage="com.hycloud.auth.sso.storage.mapper" targetProject="F:\Projects\java\IdeaProjects\hycloud\hycloud-auth\sso\src\main\java" />
+		<javaClientGenerator targetPackage="com.hycloud.auth.sso.storage.mapper"
+			targetProject="F:\Projects\java\IdeaProjects\hycloud\hycloud-auth\sso\src\main\java" type="XMLMAPPER" />
+		<table tableName="auth" domainObjectName="Auth">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+ 		<table tableName="client" domainObjectName="Client">
+ 			<property name="useActualColumnNames" value="false" />
+ 		</table>
+		<table tableName="role" domainObjectName="Role">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="role_auth" domainObjectName="RoleAuth">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+ 		<table tableName="user" domainObjectName="User">
+ 			<property name="useActualColumnNames" value="false" />
+ 		</table>
+		<table tableName="user_info" domainObjectName="UserInfo">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="user_role" domainObjectName="UserRole">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+	</context>
+</generatorConfiguration>

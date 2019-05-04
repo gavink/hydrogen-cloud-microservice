@@ -1,0 +1,22 @@
+server:
+  port: 9200
+
+spring:
+  application:
+    name: hycloud-config-server
+  profiles:
+    active: master
+  cloud:
+    config:
+      lable: master
+      server:
+        git:
+          uri: https://gitee.com/gavin_1024/spring-cloud-config.git
+          username: xxx
+          password: xxx
+          search-paths: config-path
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/

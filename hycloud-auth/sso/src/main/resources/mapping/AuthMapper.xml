@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hycloud.auth.sso.storage.mapper.AuthMapper">
+  <resultMap id="BaseResultMap" type="com.hycloud.auth.sso.storage.entity.Auth" >
+    <id column="auth" property="auth" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="route" property="route" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    auth, name, parent_id, route, level, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hycloud.auth.sso.storage.entity.AuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from auth
+    where auth = #{auth,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from auth
+    where auth = #{auth,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hycloud.auth.sso.storage.entity.AuthExample" >
+    delete from auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hycloud.auth.sso.storage.entity.Auth" >
+    insert into auth (auth, name, parent_id,
+    route, level, status
+    )
+    values (#{auth,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
+    #{route,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hycloud.auth.sso.storage.entity.Auth" >
+    insert into auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="auth != null" >
+        auth,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="route != null" >
+        route,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="auth != null" >
+        #{auth,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="route != null" >
+        #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hycloud.auth.sso.storage.entity.AuthExample" resultType="java.lang.Integer" >
+    select count(*) from auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update auth
+    <set >
+      <if test="record.auth != null" >
+        auth = #{record.auth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.route != null" >
+        route = #{record.route,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update auth
+    set auth = #{record.auth,jdbcType=VARCHAR},
+    name = #{record.name,jdbcType=VARCHAR},
+    parent_id = #{record.parentId,jdbcType=INTEGER},
+    route = #{record.route,jdbcType=VARCHAR},
+    level = #{record.level,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hycloud.auth.sso.storage.entity.Auth" >
+    update auth
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="route != null" >
+        route = #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where auth = #{auth,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hycloud.auth.sso.storage.entity.Auth" >
+    update auth
+    set name = #{name,jdbcType=VARCHAR},
+    parent_id = #{parentId,jdbcType=INTEGER},
+    route = #{route,jdbcType=VARCHAR},
+    level = #{level,jdbcType=INTEGER},
+    status = #{status,jdbcType=INTEGER}
+    where auth = #{auth,jdbcType=VARCHAR}
+  </update>
+  
+  <resultMap type="com.hycloud.auth.sso.storage.entity.Auth" id="AuthTreeMap" extends="BaseResultMap">
+    <collection property="children" javaType="java.util.ArrayList" select="getAuthTree"
+    	column="id" ofType="com.hycloud.auth.sso.storage.entity.Auth"></collection>
+  </resultMap>
+  <select id="getAuthTree" parameterType="java.lang.Integer" resultMap="AuthTreeMap">
+  	select * from auth
+  	where parentId=#{id,jdbcType=INTEGER}
+  </select>
+
+  <resultMap type="com.hycloud.auth.sso.storage.entity.Menu" id="menuMap">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+  	<result column="auth" jdbcType="VARCHAR" property="name" />
+  	<result column="name" jdbcType="VARCHAR" property="title" />
+  	<result column="parentId" jdbcType="INTEGER" property="parentId" />
+  	<result column="level" jdbcType="INTEGER" property="level" />
+  </resultMap>
+  <select id="getMenus" parameterType="java.lang.String" resultMap="menuMap">
+  	select a.id, a.auth, a.name, a.parentId, a.level 
+  	from auth a, role_auth ra, user_role ur
+  	where a.status=1 and a.level &gt; 0 and a.level &lt;= 2 and ur.username=#{username,jdbcType=VARCHAR} and a.id=ra.authId and ra.role=ur.role
+  </select>
+</mapper>

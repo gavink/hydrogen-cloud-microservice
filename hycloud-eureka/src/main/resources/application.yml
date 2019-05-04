@@ -1,0 +1,27 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: hycloud-eureka-server
+
+eureka:
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 30000
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: user
+    password: 123456

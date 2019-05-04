@@ -1,0 +1,7 @@
+target/
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+.settings/
+.idea/
+*.iml

@@ -1,0 +1,50 @@
+server:
+  port: 8400
+
+spring:
+  application:
+    name: hycloud-sso
+  datasource:
+    url: jdbc:mysql://192.168.99.200:3306/hycloud
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 1
+    host: 192.168.99.200
+    port: 6379
+    timeout: 3000
+  sleuth:
+    sampler:
+      percentage: 1.0
+  zipkin:
+    rabbitmq:
+      queue: zipkin
+  rabbitmq:
+    host: 192.168.99.200
+    port: 5672
+    username: admin
+    password: 123456
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    resource:
+      filter-order: 3
+
+hycloud:
+  auth:
+    tokenExpire: 1800
+    refreshTokenExpire: 21600
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.hycloud.auth.sso.storage.entity
+
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
